@@ -2,7 +2,6 @@
 
 import copy
 import hmac
-import itertools
 import json
 import os
 import random
