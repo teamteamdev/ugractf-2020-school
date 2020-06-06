@@ -85,15 +85,8 @@ def make_app(state_dir):
         with open(os.path.join(run_dir, "program.py"), "w") as program:
             program.write(code)
         try:
-            print(["kyzylborda-sandbox",
-                 "--mount", "/nix/store",
-                 "--mount", f"/etc={flag_dir}",
-                 "--mount", f"/root={run_dir}",
-                 "--cd", "/root",
-                 sys.executable, "program.py"
-                ])
             ret = subprocess.run(
-                ["kyzylborda-sandbox",
+                [sys.executable, "-m", "kyzylborda.sandbox",
                  "--mount", "/nix/store",
                  "--mount", f"/etc={flag_dir}",
                  "--mount", f"/root={run_dir}",
