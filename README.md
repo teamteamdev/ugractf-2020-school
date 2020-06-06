@@ -4,16 +4,16 @@
 
 ## Таски 
 
-[Он так видит](artist/) (reverse 200, kalan)  
-[777](casino/) (web 200, abbradar)  
-[Сага о резервных копиях](dumpster/) (forensics 200, kalan)  
-[Пинг](hello/) (stegano 200, nsychev)  
-[Задача 27](lms/) (pwn 250, abbradar)  
-[В эфире](onair/) (web 150, nsychev)  
-[Напечатай это](printme/) (forensics 100, kalan)  
-[Перевёртыш](reverse/) (crypto 100, kalan)  
-[Камуфляж](uniform/) (stegano 300, kalan)  
-[Вопрос на миллион](zinaida/) (ppc 300, kalan)
+[Он так видит](tasks/artist/) (reverse 200, kalan)  
+[777](tasks/casino/) (web 200, abbradar)  
+[Сага о резервных копиях](tasks/dumpster/) (forensics 200, kalan)  
+[Пинг](tasks/hello/) (stegano 200, nsychev)  
+[Задача 27](tasks/lms/) (pwn 250, abbradar)  
+[В эфире](tasks/onair/) (web 150, nsychev)  
+[Напечатай это](tasks/printme/) (forensics 100, kalan)  
+[Перевёртыш](tasks/reverse/) (crypto 100, kalan)  
+[Камуфляж](tasks/uniform/) (stegano 300, kalan)  
+[Вопрос на миллион](tasks/zinaida/) (ppc 300, kalan)
 
 ## Команда разработки
 
