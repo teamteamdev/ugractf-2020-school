@@ -9,3 +9,4 @@ description: >
 generator:   generate.py
 daemon:      server/start_server.sh
 daemon_socket: "lms.sock"
+submit_not_after: "2020-06-06T12:15:00Z"
