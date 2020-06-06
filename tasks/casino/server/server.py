@@ -17,7 +17,7 @@ SECRET3 = b"pitch without motor coach"
 SALT2_SIZE = 12
 
 CRASH_TIME = timedelta(seconds=3)
-NEEDED_WINS = 1
+NEEDED_WINS = 10
 
 
 def get_flag(token):
@@ -71,9 +71,9 @@ def make_app(state_dir):
                 return 0, random_state
 
 
-    def render_wheel(wins, bet=None, **kwargs):
+    def render_wheel(token, wins, bet=None, **kwargs):
         if wins >= NEEDED_WINS:
-            return f"Вы победили по жизни. Ваш счёт в банке: {get_flag()}"
+            return f"Вы победили по жизни. Ваш счёт в банке: {get_flag(token)}"
         else:
             return render_template("wheel.html", wins=wins, bet=bet, **kwargs)
 
@@ -81,7 +81,7 @@ def make_app(state_dir):
     @app.route("/<token>/", methods=["GET"])
     def main_get(token):
         wins, random_state = get_user_wins(token)
-        return render_wheel(wins)
+        return render_wheel(token, wins)
 
 
     @app.route("/<token>/", methods=["POST"])
@@ -109,7 +109,7 @@ def make_app(state_dir):
                 # Protect from race conditions.
                 abort(500)
             db.commit()
-        return render_wheel(new_wins, bet=bet, winning_bet=winning_bet)
+        return render_wheel(token, new_wins, bet=bet, winning_bet=winning_bet)
 
 
     return app

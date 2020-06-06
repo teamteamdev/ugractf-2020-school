@@ -1,0 +1,9 @@
+category:    "web"
+name:        "777"
+points:      200
+author:      "abbradar"
+description: >
+    <p>Новое онлайн-казино! Абсолютно честное — играйте и выигрывайте. Выплаты в Фантиках (Ф). Пока что, правда, доступна только рулетка, да и та особенная.</p>
+generator:   generate.py
+daemon:      server/start_server.sh
+daemon_socket: "casino.sock"
