@@ -6,26 +6,57 @@
         <style>
             body {
                 background-color: black;
-                font-color: yellow;
+                color: yellow;
             }
         </style>
     </head>
-    <body >
-        <img src="/static/777.gif">
-        <img src="/static/777.gif">
-        <img src="/static/777.gif"><br>
+    <body>
+        <p>
+            <img src="/static/777.gif">
+            <img src="/static/777.gif">
+            <img src="/static/777.gif">
+        </p>
 
         {% if bet is not none %}
+            <p>Выигрышный номер: {{ winning_bet }}, ваш номер: {{ bet }}</p>
             {% if bet == winning_bet %}
-
-        Вы выиграли {{ wins }} раз!
-        {% if winning_bet %}
-            Выигрышный номер: {{ winning_bet }}
+                <marquee>У Р А</marquee>
+                <p><b>Ура!</b> Вы <span style="color: green">выиграли</span> ещё 1 Ф.</p>
+            {% else %}
+                <p>Сожалеем, вы <span style="color: red">проиграли</span> и ваши фантики ушли казино. Получите 1 Ф как утешительный приз.</p>
+            {% endif %}
         {% endif %}
+
+        <table style="transform: rotate(-90deg); text-align: center; margin: auto; font-size: 30px">
+            {% for y in range(12) %}
+                <tr>
+                    {% for x in range(3) %}
+                        <td style="background-color: {{ 'red' if (y * 3 + x) % 2 == 0 else 'grey' }}">
+                            {% if winning_bet is not none and winning_bet == (y * 3 + x + 1) %}
+                                {% if winning_bet == bet %}
+                                    <span style="font-weight: bold; color: green">{{ y * 3 + x + 1 }}</span>
+                                {% else %}
+                                    <span style="font-weight: bold">{{ y * 3 + x + 1 }}</span>
+                                {% endif %}
+                            {% elif bet is not none and bet == (y * 3 + x + 1) %}
+                                <span style="color: darkred">{{ y * 3 + x + 1 }}</span>
+                            {% else %}
+                                {{ y * 3 + x + 1 }}
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+
+
         <form method="post">
-            Сделайте вашу ставку, от 1 до 34:
-            <input type="text" name="bet">
-            <input type="submit" value="Сделать!">
+            <p>ВАШ СЧЁТ: {{ wins + 1 }} Ф</p>
+            <p>
+                Сделайте вашу ставку, от 1 до 34:
+                <input type="text" name="bet">
+                <input type="submit" value="ПОБЕДИТЬ">
+            </p>
         </form>
     </body>
 </html>
