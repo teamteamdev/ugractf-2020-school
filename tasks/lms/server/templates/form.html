@@ -5,25 +5,38 @@
         <title>Тестовый экзамен</title>
     </head>
     <body>
-        C4. Напишите программу, которая реализует расчёт значения члена последовательности Фибоначчи.
-        Программа должна принимать на вход число, и выводить в терминал ответ.
-        Программа должна быть реализована на языке программирования Python.
+        <p><b>C4. Программирование</b></p>
+        <p>
+        Напишите программу, которая реализует расчёт значения члена последовательности Фибоначчи.
+            Программа должна принимать на вход число, и выводить в терминал ответ.
+        </p>
+        <p>
+            Программа должна быть реализована на языке программирования Python.
+        </p>
 
-        <form method="post">
-            <textarea cols="80" rows="20" name="code">import sys
-n = int(sys.stdin.read())
-answer = 0
-print(answer)</textarea>
-            <input type="submit" value="Проверить">
-        </form>
+        <p style="color:red; font-size: 14px; font-style: italic">
+            ВНИМАНИЕ! Данный вариант является ТЕСТОВЫМ! Условия экзаменационных задач будут открыты только во время экзамена!
+        </p>
+
+        <p>
+            <form method="post">
+                <textarea cols="80" rows="20" name="code">{{ placeholder }}</textarea><br>
+                <input type="submit" value="Проверить">
+            </form>
+        </p>
 
         {% if success is not none %}
-            Последний результат: {{ success }}
-            Ошибки: {{ errormsg }}
+            {% if success %}
+                <p style="color:green">Успех!</p>
+            {% else %}
+                <p style="color:red">ОШИБКА!</p>
+                <p>{{ errormsg }}</p>
+            {% endif %}
         {% endif %}
 
         <form action="reset" method="post">
-            <input type="submit" value="Сбросить вариант">
+            Настоящая проверочная система (далее — Система) находится в режиме ПУБЛИЧНОГО ТЕСТИРОВАНИЯ. При возникновении проблем, пожалуйста, нажмите сюда:<br>
+            <input type="submit" value="Сброс варианта задания">
         </form>
     </body>
 </html>

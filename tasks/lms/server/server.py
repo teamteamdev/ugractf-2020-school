@@ -9,9 +9,15 @@ import random
 import shutil
 import subprocess
 
-PREFIX = "ugra_i_can_follow_links_"
-SECRET2 = b"tray-level-sock-color-grandfather"
+PREFIX = "ugra_use_well_tested_sandboxes_"
+SECRET2 = b"order many pair dream"
 SALT2_SIZE = 12
+
+
+PLACEHOLDER = """import sys
+n = int(sys.stdin.read())
+answer = 0
+print(answer)"""
 
 
 def get_flag(token):
@@ -38,7 +44,7 @@ def make_app(state_dir):
 
     @app.route('/<token>/', methods=["GET"])
     def main_get(token):
-        return render_template("form.html", success=None)
+        return render_template("form.html", placeholder=PLACEHOLDER, success=None)
 
 
     def reset_path(token):
@@ -95,15 +101,15 @@ def make_app(state_dir):
                  sys.executable, "runner.py"
                 ], stdout=subprocess.PIPE, timeout=10)
         except subprocess.TimeoutExpired:
-            return render_template("form.html", success=False, errormsg="Время истекло.")
+            return render_template("form.html", success=False, placeholder=code, errormsg="Время истекло.")
         except:
             abort(500)
 
         if ret.returncode == 0:
             remove_path(sandbox_path)
-            return render_template("form.html", success=True)
+            return render_template("form.html", success=True, placeholder=code)
         else:
-            return render_template("form.html", success=False, errormsg=ret.stdout.decode("utf-8"))
+            return render_template("form.html", success=False, placeholder=code, errormsg=ret.stdout.decode("utf-8"))
 
 
     @app.route('/<token>/reset', methods=["POST"])
@@ -111,10 +117,10 @@ def make_app(state_dir):
         # Just in case.
         if re.fullmatch("[a-zA-Z0-9]+", token) is None:
             abort(500)
-        sandbox_path = os.path.abspath(state_dir, token)
+        sandbox_path = os.path.join(state_dir, token)
         if os.path.exists(sandbox_path):
             remove_path(sandbox_path)
-        return redirect(url_for("main_get", token), code=303)
+        return redirect(url_for("main_get", token=token), code=303)
 
 
     return app
