@@ -10,5 +10,7 @@
     gunicorn
     aiohttp
     aiohttp-jinja2
+    pillow
+    python-barcode
   ];
 }
