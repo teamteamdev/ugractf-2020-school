@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Это мой ХОЛСТ</title>
+        <style>
+            body {
+                background: white; padding: 0; margin: 0; position: relative;
+                font-size: 24px;
+                font-weight: 300;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="c" width="1280" height="720"></canvas>
+        <script type="text/javascript">
+            let data = {{ data }};
+            let pos = 0;
+            let px = 50;
+            let py = 400;
+            let c = document.getElementById("c");
+            let ctx = c.getContext("2d");
+
+            window.setInterval(() => {
+                if (pos >= data.length) {
+                    return;
+                }
+                const nx = px + Math.floor(data[pos][0]) * 7;
+                const ny = py + Math.floor(data[pos][1]) * 7;
+
+                ctx.beginPath();
+                ctx.moveTo(px, py);
+                ctx.lineTo(nx, ny);
+                ctx.stroke();
+
+                px = nx;
+                py = ny;
+                ++pos;
+            }, 10);
+        </script>
+    </body>
+</html>
