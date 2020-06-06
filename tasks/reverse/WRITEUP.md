@@ -6,4 +6,4 @@
 
 Расшифровать файл можно [Кибершефом](https://gchq.github.io/CyberChef/#recipe=To_Binary%28%27None%27%29Reverse%28%27Character%27%29From_Binary%28%27Space%27%29).
 
-Флаг: ****
+Флаг: **ugra_deified_civic_radar_reviver_43606da62035**
