@@ -1,0 +1,10 @@
+category: "reverse"
+name:     "Он так видит"
+points:   200
+author:   kalan
+description: |
+    <p>Художник хотел написать красивую картину, но вечно его тянет куда-то не туда. Направьте его на путь истинный.
+generator: generate.py
+daemon:    app/server.py
+daemon_socket: "artist.sock"
+submit_not_after: "2020-06-06T12:00:00Z"
