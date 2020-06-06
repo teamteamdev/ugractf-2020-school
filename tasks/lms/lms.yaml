@@ -1,10 +1,10 @@
 category:    "pwn"
 name:        "Задача C4"
-points:      50
+points:      200
 author:      "abbradar"
 description: >
     <p>Не только разработчики CTFов пишут и пользуются своими велосипедами.
     В этот году составители ЕГЭ по информатике решили перенести приём одного из заданий в собственную проверочную систему.
     Даже публичное тестирование объявили...</p>
 generator:   generate.py
-daemon:      app/start_server.sh
+daemon:      server/start_server.sh

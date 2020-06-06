@@ -11,13 +11,13 @@ from datetime import datetime, timedelta, timezone
 import sqlite3
 
 
-PREFIX = "ugra_i_can_follow_links_"
-SECRET2 = b"tray-level-sock-color-grandfather"
-SECRET3 = b"haha_hoho"
+PREFIX = "ugra_vulnerability_beats_probability_"
+SECRET2 = b"near tower physical against"
+SECRET3 = b"pitch without motor coach"
 SALT2_SIZE = 12
 
-CRASH_TIME = timedelta(seconds=1)
-NEEDED_WINS = 10
+CRASH_TIME = timedelta(seconds=3)
+NEEDED_WINS = 1
 
 
 def get_flag(token):
@@ -71,11 +71,11 @@ def make_app(state_dir):
                 return 0, random_state
 
 
-    def render_wheel(wins, **kwargs):
+    def render_wheel(wins, bet=None, **kwargs):
         if wins >= NEEDED_WINS:
             return f"Вы победили по жизни. Ваш счёт в банке: {get_flag()}"
         else:
-            return render_template("wheel.html", wins=wins, **kwargs)
+            return render_template("wheel.html", wins=wins, bet=bet, **kwargs)
 
 
     @app.route("/<token>/", methods=["GET"])
@@ -96,7 +96,7 @@ def make_app(state_dir):
                 db.commit()
                 abort(500)
         rand = random.Random(random_state)
-        winning_bet = rand.randrange(1, 100)
+        winning_bet = rand.randrange(1, 36)
         if bet != winning_bet:
             new_wins = 0
         else:
@@ -109,7 +109,7 @@ def make_app(state_dir):
                 # Protect from race conditions.
                 abort(500)
             db.commit()
-        return render_wheel(new_wins, winning_bet=winning_bet)
+        return render_wheel(new_wins, bet=bet, winning_bet=winning_bet)
 
 
     return app
