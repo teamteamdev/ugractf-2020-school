@@ -10,7 +10,7 @@ description: |
     Настолько, что даже открыли её исходный код. Что ж, мы тоже
     в них верим, и надеемся, что наши секреты никто не прочитает.</p>
 generator: generate.py
-daemon: app/app.js
+daemon: app/hideerrs.sh
 daemon_socket: onair.sock
 attachments_path: public/
 submit_not_after: "2020-06-06T12:15:00Z"
