@@ -111,6 +111,7 @@
         </div>
         <script type="text/javascript">
             let sound = new Audio("/static/beep.mp3");
+            sound.volume = 0.6;
 
             document.getElementById("barcode").onkeypress = (e) => {
                 if (e.keyCode != 13) {
