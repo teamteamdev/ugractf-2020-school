@@ -1,0 +1,24 @@
+<%- include('header') -%>
+<div class="card" style="padding: 0.5em 1em;">
+    <h1><%= user.login %></h1>
+    <p>Активный пользователь 4 уровня</p>
+    <p>Ваш пароль: <strong><%= user.password %></strong></p>
+</div>
+<h2>Блоги пользователя</h2>
+<% for (const post of posts) { %>
+    <div class="card mb-2" style="padding: 0.5em 1em;">
+        <h3><a href="/<%=token%>/user/post/<%=post.id%>"><%=post.title%></a></h3>
+        <% if (post.isPrivate) { %>
+            <p>Приватный пост — доступен только Вам.</p>
+        <% } else { %>
+            <p>Публичный пост.</p>
+        <% } %>
+    </div>
+<% } %>
+<% if (posts.length === 0) { %>
+    <p>Вы ничего не сделали.</p>
+    <p>
+        <a href="/<%=token%>/user/post" class="btn btn-primary">Так сделайте же</a>
+    </p>
+<% } %>
+<%- include('footer') -%>
