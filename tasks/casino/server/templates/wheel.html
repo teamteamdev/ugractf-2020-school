@@ -2,15 +2,28 @@
 <html class="no-js" lang="">
     <head>
         <meta charset="utf-8">
-        <title>Казино</title>
+        <title>КАЗИНО «777»</title>
+        <style>
+            body {
+                background-color: black;
+                font-color: yellow;
+            }
+        </style>
     </head>
-    <body>
+    <body >
+        <img src="/static/777.gif">
+        <img src="/static/777.gif">
+        <img src="/static/777.gif"><br>
+
+        {% if bet is not none %}
+            {% if bet == winning_bet %}
+
         Вы выиграли {{ wins }} раз!
         {% if winning_bet %}
             Выигрышный номер: {{ winning_bet }}
         {% endif %}
         <form method="post">
-            Сделайте вашу ставку, от 1 до 100:
+            Сделайте вашу ставку, от 1 до 34:
             <input type="text" name="bet">
             <input type="submit" value="Сделать!">
         </form>
