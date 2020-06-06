@@ -1,0 +1,10 @@
+category: "ppc"
+name:     "Вопрос на миллион"
+points:   300
+author:   kalan
+description: |
+    <p>Директор магазина очень разозлился на кассиршу Зинаиду и решил её наказать. Он сказал, что не отпустит её домой, пока она не заработает на своей кассе выручку в миллион рублей!
+generator: generate.py
+daemon:    app/server.py
+daemon_socket: "zinaida.sock"
+submit_not_after: "2020-06-06T12:00:00Z"

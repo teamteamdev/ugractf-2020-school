@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Рабочее место</title>
+        <style>
+            body {
+                background: white; padding: 0; margin: 0; position: relative;
+                font-size: 24px;
+                font-weight: 300;
+                font-family: 'Droid Sans Mono', 'Lucida Console', 'Consolas', monospace;
+                overflow: hidden;
+            }
+            input { font: inherit; background: inherit; border: none; color: white; outline: none; }
+            #rail {
+                background: #444;
+                position: absolute;
+                height: 10vh;
+                width: 100vw;
+                top: 50vh;
+            }
+            #next-thing {
+                position: absolute;
+                top: 35vh;
+                width: 20vw;
+                height: 20vh;
+                left: 0;
+            }
+            #next-pic {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+            }
+            #next-barcode {
+                position: absolute;
+                bottom: 5vh;
+                left: 15%;
+                width: 70%;
+                opacity: 0.7;
+                transform: rotate(7deg);
+            }
+            #display {
+                position: absolute;
+                background: black;
+                left: 30vw;
+                width: 50vw;
+                outline: 5vw solid #EEE;
+                top: 20vh;
+                height: 40vh;
+                color: white;
+                margin-bottom: 4em;
+                position: relative;
+                overflow: hidden;
+                padding: 10px;
+            }
+            #display-pillar {
+                position: absolute;
+                background: #EEE;
+                left: 50vw;
+                width: 10vw;
+                top: 30vh;
+                height: 70vh;
+            }
+            #total {
+                position: absolute;
+                bottom: 1.5em;
+                font-size: 150%;
+            }
+            input {
+                position: absolute;
+                bottom: 0;
+                font-size: 150%;
+            }
+            #display p {
+                display: grid;
+                grid-template-columns: auto 6em;
+            }
+            #display p span:last-child {
+                text-align: right;
+            }
+            #next-thing {
+                transition-duration: 1s;
+                transition-timing-function: easeOutCubic;
+                transition-property: left;
+                left: 0;
+            }
+            #next-thing.away {
+                transition-duration: 1s;
+                transition-timing-function: easeInCubic;
+                left: 120vw;
+            }
+            #next-thing.incoming {
+                transition: none;
+                left: -20vw;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="rail"> </div>
+        <div id="display-pillar"> </div>
+        <div id="next-thing">
+            <img id="next-pic" src="" />
+            <img id="next-barcode" src="" />
+        </div>
+        <div id="display">
+            <div id="lines">
+                <p>Это начало рабочего дня. Нажмите Enter</p>
+            </div>
+            <div id="total" style="display: none">Итого: <span id="total-sum">0.00</span> ₽</div>
+            <input id="barcode" value="" placeholder="Штрих-код?" />
+        </div>
+        <script type="text/javascript">
+            let sound = new Audio("/static/beep.mp3");
+
+            document.getElementById("barcode").onkeypress = (e) => {
+                if (e.keyCode != 13) {
+                    return true;
+                }
+
+                fetch("next", {"method": "POST", "headers": {"Content-type": "application/x-www-form-urlencoded"},
+                               "body": "barcode=" + document.getElementById("barcode").value}).then(response => {
+                    if (response.status != 200) {
+                        return {"error": response.status};
+                    }
+                    return response.json();
+                }).then(data => {
+                    document.getElementById("barcode").value = "";
+                    if (data.error == 422) {
+                        alert("Вы ввели штрих-код неправильно, вводите правильно");
+                        return;
+                    } else if (data.error) {
+                        alert("Ошибка " + data.error);
+                        return;
+                    }
+                    
+                    if (data.last) {
+                        p = document.createElement("p");
+                        p.innerHTML = `<span>${data.last}</span><span>${data.last_price.toString().replace(/(..)$/, '.$1')}</span>`;
+                        document.getElementById("lines").appendChild(p);
+                        if (document.getElementById("lines").children.length > 3) {
+                            document.getElementById("lines").removeChild(document.getElementById("lines").children[0]);
+                        }
+                        document.getElementById("total-sum").innerHTML = data.sum.toString().replace(/(..)$/, '.$1');
+                    } else {
+                        document.getElementById("lines").innerHTML = "";
+                        document.getElementById("total").style.display = "block";
+                    }
+
+                    document.getElementById("next-thing").className = "away";
+                    window.setTimeout(() => {
+                        document.getElementById("next-pic").src = data.next_pic;
+                        document.getElementById("next-barcode").src = "data:image/png;base64," + data.next_barcode;
+                        document.getElementById("next-thing").className = "incoming";
+                        window.setTimeout(() => {
+                            document.getElementById("next-thing").className = "";
+                        }, 100);
+                    }, 1000);
+                    sound.play();
+                });
+            }
+            window.onload = () => {
+                document.getElementById("barcode").focus();
+                if (document.cookie.match(/wstate=/)) {
+                    document.getElementById("barcode").onkeypress({"keyCode": 13});
+                }
+            }
+        </script>
+    </body>
+</html>
