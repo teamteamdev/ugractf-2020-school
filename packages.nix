@@ -2,6 +2,7 @@
   binPackages = pkgs: with pkgs; [
     coreutils
     bash
+    node
   ];
 
   pythonPackages = self: with self; [
