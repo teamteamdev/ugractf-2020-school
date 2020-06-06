@@ -4,7 +4,7 @@ import subprocess
 
 
 res = subprocess.run(
-    ["kyzylborda-sandbox",
+    [sys.executable, "-m", "kyzylborda.sandbox",
      "--mount", "/nix/store",
      "--mount", os.getcwd(),
      sys.executable, "program.py"
