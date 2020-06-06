@@ -1,0 +1,24 @@
+<%- include('header') -%>
+<h1>Напишите новость</h1>
+<form method="POST">
+    <% if (fromPost) { %>
+    <p>[Ответ на <a href="/<%=token%>/user/post/<%=fromPost%>">запись</a>]</p>
+    <input type="hidden" name="from" value="<%=fromPost%>" />
+    <% } %>
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="title" value="<%=title%>" name="title" />
+    </div>
+    <div class="form-group">
+      <label for="text">Text</label>
+      <textarea class="form-control" id="text" name="text" rows="3"><%=text%></textarea>
+    </div>
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" name="isPrivate" value="true" /> Приватный пост
+      </label>
+    </div>
+    <p>Отправляя пост, вы согласны на обработку персональных данных. Пост не может быть удалён.</p>
+    <button class="btn btn-success">Добавить пост</button>
+  </form>
+<%- include('footer') -%>

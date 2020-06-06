@@ -1,0 +1,12 @@
+<%- include('header') -%>
+<h1><%=post.title %></h1>
+<% if (post.isPrivate && post.userId !== user.id) { %>
+<div class="alert alert-danger">
+    Вы не можете читать этот пост.
+</div>
+<% } else { %>
+    <p>Автор: <strong><%=author.login %></strong></p>
+    <p><%=post.text %></p>
+    <p><a href="/<%=token%>/user/post?from=<%=post.id%>" class="btn btn-warning">Создать ответ</a></p>
+<% } %>
+<%- include('footer') -%>

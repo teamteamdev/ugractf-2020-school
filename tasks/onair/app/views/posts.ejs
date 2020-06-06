@@ -1,0 +1,28 @@
+<%- include('header') -%>
+<h1>Свежие блоги</h1>
+<% for (const post of posts) { %>
+    <div class="card mb-2" style="padding: 0.5em 1em;">
+        <h3><a href="/<%=token%>/user/post/<%=post.id%>"><%=post.title%></a></h3>
+        <p>Автор: <strong><%=users.get(post.userId).login%></strong></p>
+        <% if (post.isPrivate) { %>
+            <p>Приватный пост.</p>
+        <% } else { %>
+            <p><a href="/<%=token%>/user/post/<%=post.id%>" class="btn btn-success">Читать</a></p>
+        <% } %>
+    </div>
+<% } %>
+<% if (posts.length === 0) { %>
+    <p>Тут ничего нет.</p>
+    <p>
+        <a href="/<%=token%>/user/post" class="btn btn-primary">Так напишите же</a>
+    </p>
+<% } %>
+<p>
+<% if (prev !== null) { %>
+    <a href="/<%=token%>/user/posts?offset=<%=prev%>">Назад</a>
+<% } %>
+<% if (next !== null) { %>
+    <a href="/<%=token%>/user/posts?offset=<%=next%>">Вперед</a>
+<% } %>
+</p>
+<%- include('footer') -%>
