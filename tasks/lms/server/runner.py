@@ -6,7 +6,7 @@ import subprocess
 res = subprocess.run(
     ["kyzylborda-sandbox",
      "--mount", "/nix/store",
-     "--mount", os.path.join(os.getcwd(), "program.py"),
+     "--mount", os.getcwd(),
      sys.executable, "program.py"
     ], input=str(TEST_INPUT).encode("utf-8"), capture_output=True)
 try:
