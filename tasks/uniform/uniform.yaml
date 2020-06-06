@@ -1,0 +1,8 @@
+category: "stegano"
+name:     "Камуфляж"
+points:   200
+author:   kalan
+description: |
+    <p>На этой картинке <em>кое-что</em> затаилось. Назовите <em>кое-что</em>.
+generator: generate.py
+submit_not_after: "2020-06-06T12:00:00Z"
