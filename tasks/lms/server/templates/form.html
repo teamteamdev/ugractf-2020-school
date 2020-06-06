@@ -1,0 +1,29 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <title>Тестовый экзамен</title>
+    </head>
+    <body>
+        C4. Напишите программу, которая реализует расчёт значения члена последовательности Фибоначчи.
+        Программа должна принимать на вход число, и выводить в терминал ответ.
+        Программа должна быть реализована на языке программирования Python.
+
+        <form method="post">
+            <textarea cols="80" rows="20" name="code">import sys
+n = int(sys.stdin.read())
+answer = 0
+print(answer)</textarea>
+            <input type="submit" value="Проверить">
+        </form>
+
+        {% if success is not none %}
+            Последний результат: {{ success }}
+            Ошибки: {{ errormsg }}
+        {% endif %}
+
+        <form action="reset" method="post">
+            <input type="submit" value="Сбросить вариант">
+        </form>
+    </body>
+</html>

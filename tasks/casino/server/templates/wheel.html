@@ -1,0 +1,18 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <title>Казино</title>
+    </head>
+    <body>
+        Вы выиграли {{ wins }} раз!
+        {% if winning_bet %}
+            Выигрышный номер: {{ winning_bet }}
+        {% endif %}
+        <form method="post">
+            Сделайте вашу ставку, от 1 до 100:
+            <input type="text" name="bet">
+            <input type="submit" value="Сделать!">
+        </form>
+    </body>
+</html>
