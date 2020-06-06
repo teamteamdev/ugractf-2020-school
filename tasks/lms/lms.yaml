@@ -8,3 +8,4 @@ description: >
     Даже публичное тестирование объявили...</p>
 generator:   generate.py
 daemon:      server/start_server.sh
+daemon_socket: "lms.sock"
